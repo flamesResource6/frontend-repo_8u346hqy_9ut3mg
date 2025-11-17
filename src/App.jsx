@@ -1,26 +1,35 @@
 import { useState } from 'react'
+import Generator from './components/Generator'
+import TestList from './components/TestList'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [savedId, setSavedId] = useState(null)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-sky-50">
+      <header className="px-6 py-4 border-b bg-white/70 backdrop-blur sticky top-0">
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-gray-800">AI Test Maker for Teachers</h1>
+          <a href="/test" className="text-sm text-blue-700 hover:underline">Check backend</a>
         </div>
-      </div>
+      </header>
+
+      <main className="max-w-5xl mx-auto px-6 py-10 space-y-10">
+        <section className="bg-white rounded-xl shadow p-6">
+          <h2 className="text-xl font-semibold mb-4">Generate a test</h2>
+          <Generator onSaveSuccess={setSavedId} />
+          {savedId && (
+            <div className="mt-4 text-emerald-700">Saved! ID: {savedId}</div>
+          )}
+        </section>
+
+        <section className="bg-white rounded-xl shadow p-6">
+          <h2 className="text-xl font-semibold mb-4">Your saved tests</h2>
+          <TestList />
+        </section>
+      </main>
+
+      <footer className="text-center text-xs text-gray-500 py-6">Built with Vibe Coding</footer>
     </div>
   )
 }
